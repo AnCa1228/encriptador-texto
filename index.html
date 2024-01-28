@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encriptador - Challenge ONE</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <main>
+        <!--Texto Entrada-->
+        <div class="input-container">
+            <!--Titulo-->
+            <div class="logo-title-container">
+                <div class="logo-container">
+                    <a href="https://www.linkedin.com/company/alura-latam/" target="_blank">
+                        <img src="imagenes/logo-black.png" class="logo" alt="logo" style="translate: none; rotate: none; scale: none; transform: translate(0px); opacity: 1;">
+                    </a>
+                </div>
+                <div class="title-container">
+                    <h1 class="title">Encriptador de Texto Challenge ONE</h1>
+                </div>
+            </div>
+            
+
+            <!--Text Area-->
+            <div class="textarea-container">
+                <textarea id="texto-inicial" name="texto-inicial" placeholder="Ingrese el texto aquí..."></textarea>
+            </div>
+
+            <!--Seccion de botones-->
+            <div class="button-section">
+                <!--Mensaje informativo-->
+                <div class="info-text">
+                    <span class="material-symbols-outlined">
+                        error
+                        </span>
+                    <p>Solo letras minúsculas y sin acentos.</p>
+                </div>
+                <!--Container de botones-->
+                <div class="button-container">
+                    <button onclick="encriptar(); mostrarMensaje();" class="button" id="button-encriptar" disabled>Encriptar</button>
+                    <button onclick="desencriptar();" class="button" id="button-desencriptar" disabled>Desencriptar</button>
+                </div>
+            </div>
+        </div>
+
+        <!--Texto Salida-->
+        <div class="output-container">
+            <div class="output-inicial">
+                <div class="gif-output">
+                    <img class="output-img" src="gif/juicy-man-programmer-writing-code-and-make-web-design-on-a-pc.gif">
+                    Illustration by <a href="https://icons8.com/illustrations/author/XTPoH093lluQ">Viktoriya Belinio</a> from <a href="https://icons8.com/illustrations">Ouch!</a>
+                </div>                
+                <div class="output-text">
+                    <p id="output-title">Ningún mensaje fue encontrado</p>
+                    <p id="output-parraf">Por favor, ingrese un mensaje para encriptar o desencriptar</p>
+                </div>
+            </div>
+            <div class="output-final">
+                <p id="texto-final" class="texto-final"></p>
+                <button onclick="copiarContenido();" class="button" id="button-copiar">Copiar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p class="mis-datos">© Code by Andres Ariza</p>
+            <div class="icons-footer" style="translate: none; rotate: none; scale: none; transform: translate(0px); opacity: 1;">
+                <a href="https://www.linkedin.com/in/andres-ariza-65a1151b0/">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAA90lEQVRIS+2V4Q2CMBBGYQPdgBEcQTfQDXQDN9ENYAPdQDbQEdxAN9B75moapNZyKb+85AKU8r3e9QPKInOUmfWL0QEHqWhprKqV5xdOo1vBwyj+ofsNwEqukusB0LduCHAU0ZUK1wMgUUAjopucALT3CqBFk8Q2RSu4i+BFRWcKYE+ISq+5zx5xn/QjCujbg6koAMbGCLsFILyT3HoEEyDUrZvXSjPgJGJzSZxGtYQb49wEoN9nFQ3Z2QRgD/ikEH/Aqw3uU+Hb1NwifN5qn3FLJdnoNeeMEX3zfnKRPj/4EHQR9uu+9qkU31nj/zJTVxudn/2n/wSKr1MZKmopDAAAAABJRU5ErkJggg=="/>
+                </a>
+                <a href="https://github.com/AnCa1228">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABt0lEQVRIS7WV0VHDQAxEkw6gA9NB6MBUAFRA6AAqIFQAHRAqACqAVAAd4A6gBPZ5Tpm1cBz7I5rROLlbaaU9+TyfHdjmB84/20dwpAIW8qvyrEpBv3p+yd/k66EihwhqBT6UxEM5Gm3e7yLaRbBSwN1E+R6Fv80xfQQ3pfKJ+Vs4cl17YCa40OZLAbzq+Sw/ly/l6I5jlWGQh26JxS7lxLaWCT61xqFi3jKHjQVBkDRl3bsGc9xH4NWzTxVUM8ayrMi0zh08aWFp2c70+2NMdmHo8Mew2+JconcB6gJixk9HJg+Yx29lcoJvIauCniJPEGQF2txOQItxmEiDRFOM6YtJ2uZ2Ap+gziSMZHEFGsWc5A64FpiGMN5KRnWMLQVCorDeQ44xpfqQah8JOOIoLmIg6R1TNmgTIPr727nWf8j8RUPzOiUmRyNnAltsfpMJYNzYREMqo0Ja7twxZc8lJR/W6brvsluV6qk6J40kPAPna369tOu7rus4cF44fCOH0C1fDyTn4nMZB79oC4HRuZL/q0xrQUBCZMkFDHbglXIGTenE1yGu5ZxPp2oH7fsmJ1Wm/z04wR8HGFkZKFNq2QAAAABJRU5ErkJggg=="/>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="app.js"></script>
+</body>
+</html>
